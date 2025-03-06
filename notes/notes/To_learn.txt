@@ -1,0 +1,17 @@
+authentication, solid principles, dependency injection, Unit testing(x-unit)
+
+dev-local
+stage-testers
+candidate- business team
+production- end user
+
+
+
+
+repos in azure is like git
+cicd
+azure pipeline 
+aft prod change is visi in main branch
+pipelines contains services
+releases contain different versions 
+
