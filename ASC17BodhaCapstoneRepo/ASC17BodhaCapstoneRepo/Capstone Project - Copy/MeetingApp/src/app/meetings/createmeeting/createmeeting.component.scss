@@ -1,0 +1,118 @@
+.container {
+    max-width: 800px;
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 600;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+  }
+  
+  .form-group label {
+    color: #34495e;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    padding: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+  }
+  
+  textarea.form-control {
+    min-height: 120px;
+  }
+  
+  select.form-control {
+    height: auto;
+    min-height: 150px;
+  }
+  
+  .btn-primary {
+    background-color: #3498db;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  .invalid-feedback {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  
+  .form-text {
+    color: #7f8c8d;
+    margin-top: 5px;
+  }
+  
+  /* Custom styling for date and time inputs */
+  input[type="date"],
+  input[type="time"] {
+    height: 45px;
+  }
+  
+  /* Hover effects for form controls */
+  .form-control:hover {
+    border-color: #bdc3c7;
+  }
+  
+  /* Animation for form submission */
+  @keyframes submitPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  .btn-primary:active {
+    animation: submitPulse 0.3s ease;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+    
+    .btn-primary {
+      width: 100%;
+    }
+  }
+  
+  .form-control.ng-untouched {
+    border-color: #ced4da;
+  }
+  
+  .form-control.ng-valid {
+    border-color: #198754;
+  }
+  
+  .form-control.ng-invalid.ng-touched {
+    border-color: #dc3545;
+  }
+  

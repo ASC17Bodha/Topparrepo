@@ -1,0 +1,84 @@
+<!-- RENDERING MULTIPLE ELEMENTS
+Render 2 div elements with the same structure as in the previous exercise. Try each of the
+following 3 ways to do it.
+a. Render the 2 divs as children of another div
+b. Add the 2 divs to an array and render the array of React elements
+c. Enclose the 2 divs in a React.Fragment and render -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1q3</title>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+
+    <script type="text/babel">
+
+// a. Render the 2 divs as children of another div
+        const divReactEl = (
+            <div>
+            <div>
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>
+            <div>
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>
+            </div>
+
+            
+        );
+
+        // c. Enclose the 2 divs in a React.Fragment and render
+        const divReactEl2 = (
+            <React.Fragment>
+            <div >
+                <br></br>
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>
+            <div >
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>
+            </React.Fragment>
+        );
+        // b. Add the 2 divs to an array and render the array of React elements
+        const divReactEl3 = [
+            <div>
+                <br></br>
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>,
+            <div>
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>
+        ];
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(divReactEl);
+        const root2 = ReactDOM.createRoot(document.getElementById("root2"));
+        root2.render(divReactEl2);
+        const root3 = ReactDOM.createRoot(document.getElementById("root3"));
+        root3.render(divReactEl3);
+    </script>
+
+</body>
+</html>

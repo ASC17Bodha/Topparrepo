@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title>Invoice - class component</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+            // we update state using React.Component method called setState()
+            class Invoice extends React.Component {
+                // state should be maintained in a data member called state
+                state = {
+                    curItems: items,
+                    x: 100,
+                };
+
+                // constructor(props) {
+                //     super(props);
+
+                //     this.state = {
+                //         curItems: items
+                //     };
+                // }
+
+                onClickDeleteBtn(event, item) {
+                    console.log(event);
+                    console.log(item);
+
+                    // we want to remove the `item` from curItems
+                    const newCurItems = this.state.curItems.filter(
+                        (it) => it.id !== item.id
+                    );
+
+                    // You pass an object to setState(), and the object has a subset of the properties of the state - i.e. you mention only the properties you want to update (the rest will not change)
+                    this.setState({
+                        curItems: newCurItems,
+                    });
+                }
+
+                render() {
+                    const { customer, items, points } = this.props;
+
+                    return (
+                        <div className="border border-dark p-4">
+                            <h1>Invoice</h1>
+                            <hr />
+                            <div>Customer: {customer}</div>
+
+                            {points !== undefined ? (
+                                <div>You currently have {points} points</div>
+                            ) : (
+                                <div>
+                                    Become a <strong>Prime member</strong> and
+                                    avail exciting discounts on your future
+                                    purchases.
+                                </div>
+                            )}
+
+                            <table className="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.curItems.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.name}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>{item.price}</td>
+                                            <td>
+                                                {item.quantity * item.price}
+                                            </td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-danger btn-sm"
+                                                    onClick={(event) => {
+                                                        this.onClickDeleteBtn(
+                                                            event,
+                                                            item
+                                                        );
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    );
+                }
+            }
+
+            const items = [
+                {
+                    id: 1,
+                    name: "Camlin Pen",
+                    price: 50,
+                    quantity: 2,
+                },
+                {
+                    id: 2,
+                    name: "Natraj Pencil",
+                    price: 5,
+                    quantity: 10,
+                },
+                {
+                    id: 3,
+                    name: "Apsara Eraser",
+                    price: 10,
+                    quantity: 5,
+                },
+            ];
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(
+                <section className="container my-4">
+                    <Invoice customer="John Doe" items={items} points={45} />
+                    <Invoice customer="Jane Doe" items={items} />
+                </section>
+            );
+        </script>
+    </body>
+</html>

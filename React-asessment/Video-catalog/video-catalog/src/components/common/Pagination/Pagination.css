@@ -1,0 +1,84 @@
+/* Container for pagination - single line */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap; /* Prevent wrapping to new lines */
+}
+
+/* Group paginator buttons together */
+.pagination-group {
+  display: flex;
+  align-items: center;
+}
+
+/* Style page number buttons */
+.pagination-group .page-btn {
+  border-radius: 0;
+  margin-left: -1px; /* Overlap borders */
+  border: 1px solid #007bff;
+  background: #007bff;
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.pagination-group .page-btn:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  margin-left: 0;
+}
+
+.pagination-group .page-btn:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+/* Active page styling */
+.pagination-group .page-btn.active,
+.pagination-group .page-btn.active:hover {
+  background: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Previous/Next buttons */
+.btn-prev,
+.btn-next {
+  border-radius: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #007bff;
+  background: #007bff;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+/* Unicode arrows */
+.btn-prev::after {
+  content: "\2190"; /* Left arrow */
+}
+
+.btn-next::after {
+  content: "\2192"; /* Right arrow */
+}
+
+/* Disabled state */
+.btn-prev:disabled,
+.btn-next:disabled,
+.pagination-group .page-btn:disabled {
+  background: #e9ecef;
+  border-color: #dee2e6;
+  color: #6c757d;
+}
+
+/* Ellipsis styling */
+.ellipsis {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+}

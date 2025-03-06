@@ -1,0 +1,104 @@
+<!-- src/app/components/learners/learners.component.html -->
+<div class="container mt-5">
+  <form (ngSubmit)="learnerToEdit ? updateLearner() : addLearner(learnerForm.value)" #learnerForm="ngForm">
+   
+    <!-- <div class="form-group">
+      <label for="search">Search Learners:</label>
+      <input
+        type="text"
+        id="search"
+        class="form-control"
+        [(ngModel)]="searchQuery"
+        placeholder="Search by name, email or course"
+      />
+    </div> -->
+    <h2>{{ learnerToEdit ? 'Edit Learner' : 'Add Learner' }}</h2>
+    <div class="form-group">
+      <label for="learnerName">Learner Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="learnerName"
+        ngModel
+        required
+        [value]="learnerToEdit?.name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        ngModel
+        required
+        [value]="learnerToEdit?.email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="phone"
+        ngModel
+        required
+        [value]="learnerToEdit?.phone"
+      />
+    </div>
+    <div class="form-group">
+      <label for="course">Course:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="course"
+        ngModel
+        required
+        [value]="learnerToEdit?.course"
+      />
+    </div>
+    <button type="submit" class="btn btn-success mt-3">{{ learnerToEdit ? 'Update Learner' : 'Add Learner' }}</button>
+   
+   
+    <h2>Learners List</h2>
+  
+    
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Course</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let learner of filterLearners()">
+          <td>{{ learner.id }}</td>
+          <td>{{ learner.name }}</td>
+          <td>{{ learner.email }}</td>
+          <td>{{ learner.phone }}</td>
+          <td>{{ learner.course }}</td>
+          <td>
+            <!-- <button
+              class="btn btn-warning btn-sm"
+              (click)="setLearnerToEdit(learner)"
+            >
+              Edit
+            </button> -->
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteLearner(learner.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+</div>

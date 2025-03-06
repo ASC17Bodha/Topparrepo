@@ -1,0 +1,15 @@
+<div class="dashboard-container">
+  <!-- Section Cards for Navigation -->
+  <section class="section-cards">
+    <h2>Welcome to the Virtual Learn</h2>
+    <div class="testimonial-cards">
+      <!-- Loop through the sections array and create cards -->
+      <div class="testimonial-card" *ngFor="let section of sections" (click)="navigateToSection(section.route)">
+        <div class="testimonial-card-body">
+          <h3>{{ section.title }}</h3>
+          <p>{{ section.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

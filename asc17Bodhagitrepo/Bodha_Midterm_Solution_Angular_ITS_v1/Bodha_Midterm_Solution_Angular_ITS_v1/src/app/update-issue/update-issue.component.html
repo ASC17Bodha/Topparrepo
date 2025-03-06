@@ -1,0 +1,37 @@
+<form (ngSubmit)="updateIssue()">
+    <div class="form-group mt-4">
+        <label for="id">ID:</label>
+        <input type="text" class="form-control" id="id" name="id" [(ngModel)]="issue.issueId">
+    </div>
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="issue.title">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" name="description" [(ngModel)]="issue.description">
+    </div>
+
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <input type="text" class="form-control" id="status" name="status" [(ngModel)]="issue.status">
+    </div>
+
+    <div class="form-group">
+        <label for="priority">Priority:</label>
+        <input type="text" class="form-control" id="priority" name="priority" [(ngModel)]="issue.priority">
+    </div>
+    <div class="form-group">
+        <label for="asignee">Asignee:</label>
+        <input type="text" class="form-control" id="asignee" name="asignee" [(ngModel)]="issue.asignee">
+    </div>
+    <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="issue.date">
+    </div>  
+    <div>
+        <button type="submit" class="btn btn-primary mt-4 mb-4">Submit</button>
+    </div>
+</form>

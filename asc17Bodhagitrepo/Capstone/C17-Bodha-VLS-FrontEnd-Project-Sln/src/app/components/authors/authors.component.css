@@ -1,0 +1,190 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9fafb;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #ffffff1a;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Section Titles */
+h2, h3 {
+  color: #007bff;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Search Form */
+.search-form {
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  width: 98%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  background-color: #f4f6f821;
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.table td {
+  padding: 10px;
+  border: 1px solid #dddddd1d;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f4f6f80e;
+}
+
+.table tr:hover {
+  background-color: #e9ecef25;
+}
+
+/* Buttons */
+button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #bd2130;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+/* Form Styles */
+form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 98%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+/* Flexbox for Layout */
+.formtable {
+  margin-bottom: 30px;
+}
+
+.authorform {
+  background-color: #f8f9fa20;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .formtable, .authorform {
+    margin-bottom: 20px;
+  }
+
+  .table td, .table th {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}

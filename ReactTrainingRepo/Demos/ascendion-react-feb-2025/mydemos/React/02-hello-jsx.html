@@ -1,0 +1,55 @@
+<!-- ! + Enter -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title></title>
+        <style>
+            .message {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+            const Message=({title,children})=>{
+                return(
+                    <div  className="message">
+                        <h2>{title}</h2>
+                        <div>{children}</div>
+                    </div>
+                );
+            };
+
+
+            const messageEl=(
+                <React.Fragment>
+                    <Message
+                    title="Hello React"
+                    content="React is a JavaScript library for building user interfaces.">
+                    <strong>React </strong> is a JavaScript library for building user interfaces.
+                    </Message>
+                    <Message
+                    title="Namaste Redux">
+                    <a href="http://redux.js.org">This is redux</a>
+                    </Message>
+                </React.Fragment>
+            );
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(messageEl);
+        </script>
+    </body>
+</html>

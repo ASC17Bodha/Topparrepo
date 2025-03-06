@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title></title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+            // This way of working with styles is called CSS-in-JS
+            const messageStyle = {
+                border: "1px solid black",
+                padding: "1em",
+                margin: "1em",
+            };
+
+            // CSS properties with hyphen-casing become camelCased
+            // border-color (CSS) -> borderColor (JSX)
+            const redBorder = {
+                borderColor: "crimson",
+            };
+
+            // we can easily combine style objects with th spread operator
+            const messageWithRedBorder = {
+                ...messageStyle,
+                ...redBorder,
+            };
+
+            const els = (
+                <React.Fragment>
+                    <div style={messageWithRedBorder}>Hello, world</div>
+                    <div style={messageStyle}>Hello, world</div>
+                    <div style={messageWithRedBorder}>Hello, world</div>
+                </React.Fragment>
+            );
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(<div className="container my-4">{els}</div>);
+        </script>
+    </body>
+</html>

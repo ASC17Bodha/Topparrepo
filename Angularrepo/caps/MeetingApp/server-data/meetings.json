@@ -1,0 +1,106 @@
+{
+  "meetings": [
+    {
+      "id": "1",
+      "title": "Meeting 1",
+      "date": "2020-01-01",
+      "startTime": "10:00",
+      "endTime": "1:20",
+      "description": "This is meeting 1",
+      "attendees": "john.doe'@example.com"
+    },
+    {
+      "id": "0",
+      "title": "daily sync up ",
+      "date": "2025-01-11",
+      "startTime": "14:42",
+      "endTime": "16:42",
+      "description": "daily sync of meet",
+      "attendees": " jackie@mail.com"
+    },
+    {
+      "id": "0",
+      "title": "daily sync up ",
+      "date": "2025-01-11",
+      "startTime": "14:42",
+      "endTime": "16:42",
+      "description": "daily sync of meet",
+      "attendees": "john.doe@example.com, jackie@mail.com"
+    },
+    {
+      "id": 0,
+      "title": "goodmorning",
+      "date": "2025-01-15",
+      "startTime": "13:14",
+      "endTime": "13:16",
+      "description": "morning meet",
+      "attendees": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 0,
+      "title": "goodmorning asc",
+      "date": "2025-01-29",
+      "startTime": "13:44",
+      "endTime": "13:48",
+      "description": "good meet",
+      "attendees": [
+        "{attendeeId:+{{attendee.id}}}",
+        "{attendeeId:+{{attendee.id}}}"
+      ]
+    },
+    {
+      "id": 0,
+      "title": "goodmorning asc2",
+      "date": "2025-01-24",
+      "startTime": "13:47",
+      "endTime": "13:50",
+      "description": "good meet",
+      "attendees": [
+        "attendeeId:1",
+        "attendeeId:2"
+      ]
+    },
+    {
+      "id": 0,
+      "title": "register",
+      "date": "2025-01-09",
+      "startTime": "13:51",
+      "endTime": "13:51",
+      "description": "dsf",
+      "attendees": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 0,
+      "title": "register123",
+      "date": "2025-01-15",
+      "startTime": "12:28",
+      "endTime": "12:29",
+      "description": "hjk",
+      "attendees": [
+        1,
+        2
+      ]
+    }
+  ],
+  "attendees": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "1234567890"
+    },
+    {
+      "id": "0",
+      "name": "Jackie Chan",
+      "email": "jackie@mail.com",
+      "password": "jackie@123.com"
+    }
+  ]
+}

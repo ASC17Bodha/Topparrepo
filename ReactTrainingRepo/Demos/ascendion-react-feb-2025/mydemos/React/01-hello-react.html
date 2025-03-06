@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- This code creates a React element using the `React.createElement()` method, which represents a simple "Hello React" message displayed within a centered container. The element is then rendered to the DOM element with the ID "root" using the `ReactDOM.createRoot()` and `render()` methods. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React</title>
+    <style>
+        .container {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"> 
+        <!-- <div class="container" id= "message" >
+            <h1>Hello React</h1>
+            <p>
+                <strong>React</strong> is a JavaScript library for building user interfaces.
+            </p>
+        </div> -->
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js" ></script>
+    <!-- babel is used to convert html into react elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    <script type="text/babel">
+        // JSX is used to create react elements
+        //JSX is similar to HTML but it is not HTML. It is a syntax extension to JavaScript.
+
+        // const ReactEl=React.createElement(
+        //     "div",// root element type
+        //     {
+        //         className:"container",
+        //         id:"message" //props
+        //     },
+        //     //children
+        //     React.createElement(
+        //         "h1",// element type
+        //         {}, // no props
+        //         "Hello React" //content
+        //     ),
+        //     React.createElement(
+        //         "p",
+        //         {},
+        //         React.createElement(
+        //             "strong",
+        //             null,
+        //             "React"
+        //         ),
+        //         " is a JavaScript library for building user interfaces."
+        //     )
+
+        // )
+
+     const ReactEl= 
+     <div class="container" id= "message" >
+            <h1>Hello React</h1>
+            <p>
+                <strong>React</strong> is a JavaScript library for building user interfaces.
+            </p>
+        </div>
+
+        console.log(ReactEl);
+
+        const root=ReactDOM.createRoot(document.getElementById("root")).render(ReactEl);
+        // console.log(ReactEl);
+
+    </script>
+</body>
+</html>

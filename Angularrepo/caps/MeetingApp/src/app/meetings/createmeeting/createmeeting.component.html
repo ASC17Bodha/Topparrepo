@@ -1,0 +1,38 @@
+<h2>Create Meetings</h2>
+<form (ngSubmit)="createMeeting()">
+  <div>
+    <label>Title:</label>
+    <input type="text" [(ngModel)]="meeting.title" name="title" required>
+  </div>
+  <div>
+    <label>Description:</label>
+    <textarea [(ngModel)]="meeting.description" name="description" required></textarea>
+  </div>
+  <div>
+    <label>Date:</label>
+    <input type="date" [(ngModel)]="meeting.date" name="date" required>
+  </div>
+  <div>
+    <label>StartTime:</label>
+    <input type="time" [(ngModel)]="meeting.startTime" name="time" required>
+    </div>
+  <div>
+    <label>EndTime:</label>
+    <input type="time" [(ngModel)]="meeting.endTime" name="time" required>
+
+  </div>
+  <div>
+    <label>Attendees:</label>
+    <!-- <select multiple [(ngModel)]="meeting.attendees" name="attendees">
+      <option *ngFor="let attendee of AllAttendees" [value]=attendee.id>
+        {{ attendee.name }}
+      </option>
+    </select> -->
+    <select multiple [(ngModel)]="selectedAttendeeIds" name="attendees">
+      <option *ngFor="let attendee of AllAttendees" [value]="attendee.id">
+        {{ attendee.name }}
+      </option>
+    </select>
+  </div>
+  <button type="submit">Create Meeting</button>
+</form>

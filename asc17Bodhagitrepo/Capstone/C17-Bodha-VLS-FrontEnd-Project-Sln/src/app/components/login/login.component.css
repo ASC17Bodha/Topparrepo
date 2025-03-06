@@ -1,0 +1,107 @@
+/* Styling for Admin Login Component */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  /* background: url("../../../../public/DALL·E\ 2024-12-10\ 10.06.04\ -\ A\ visually\ captivating\ background\ image\ for\ a\ virtual\ learning\ system\,\ showcasing\ components\ such\ as\ courses\,\ admin\ registration\,\ learners\,\ reviews\,\ a.webp"); */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+h2 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  background-color: #e8e2e218;
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+input[disabled] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+button {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.text-info {
+  font-size: 14px;
+  color: #b84717;
+}
+
+.text-danger {
+  font-size: 14px;
+  color: #da283a;
+}
+
+.mt-2 {
+  margin-top: 10px;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}

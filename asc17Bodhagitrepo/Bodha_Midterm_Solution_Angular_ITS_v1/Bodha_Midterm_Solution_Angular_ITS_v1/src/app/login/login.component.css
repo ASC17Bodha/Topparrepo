@@ -1,0 +1,13 @@
+#formcontainer{
+    width: 400px;
+    height: 300px;
+    backdrop-filter: blur(5px);
+    background-color: rgba(240, 248, 255, 0.317);
+    
+}
+/* #bodycontainer{
+    background:linear-gradient(orange,yellow);
+    background-size: cover;
+    width: 1200px;
+    height: 510px;
+} */

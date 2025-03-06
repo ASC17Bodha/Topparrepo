@@ -1,0 +1,72 @@
+<div class="bodydiv">
+  <div class="container mt-5">
+    <h2>Add Reviews</h2>
+    <form (ngSubmit)="addReview(reviewForm.value)" #reviewForm="ngForm">
+      <div class="form-group">
+        <label for="reviewText">Write Review:</label>
+        <textarea
+          class="form-control"
+          name="reviewText"
+          ngModel
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="courseId">Course ID:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="courseId"
+          ngModel
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="learnerId">Learner ID:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="learnerId"
+          ngModel
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Rating (1-5):</label>
+        <input
+          type="number"
+          class="form-control"
+          name="rating"
+          ngModel
+          min="1"
+          max="5"
+          required
+          #rating="ngModel"
+        />
+        <!-- Display error message for invalid rating -->
+        <div *ngIf="rating.invalid && (rating.dirty || rating.touched)" class="text-danger">
+          Rating must be between 1 and 5.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success mt-3" [disabled]="reviewForm.invalid">Add Review</button>
+    </form>
+
+    <h3 class="mt-5">Reviews List</h3>
+    <ul class="list-group">
+      <li *ngFor="let review of reviews" class="list-group-item">
+        {{ review.id }} - Course: {{ review.courseId }} - Learner: {{ review.learnerId }} - Rating: {{ review.rating }}
+        <p>{{ review.comment }}</p>
+        <button
+          class="btn btn-danger btn-sm float-end"
+          (click)="deleteReview(review.id)"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

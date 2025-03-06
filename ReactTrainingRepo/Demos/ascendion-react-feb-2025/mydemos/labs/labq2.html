@@ -1,0 +1,36 @@
+<!-- CREATING AND RENDERING AN ELEMENT – React.createElement()
+Create a div React element using JSX. It should have as children the
+following 3 elements
+a. A button with text '-'
+b. A span with id 'counter' and the text '0' as child
+c. A button with text '+'
+Render the React element inside the root div. It should look like shown below. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab1q2</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const divReactEl = (
+            <div>
+                <button>-</button>
+                <span id="counter">0</span>
+                <button>+</button>
+            </div>
+        );
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(divReactEl);
+    </script>
+    
+</body>
+</html>

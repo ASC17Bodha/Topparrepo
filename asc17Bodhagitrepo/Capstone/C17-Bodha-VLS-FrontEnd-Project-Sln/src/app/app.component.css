@@ -1,0 +1,130 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: #1a1a1a;
+  background: linear-gradient(rgba(187, 255, 0, 0.114),rgba(185, 81, 111, 0.781));
+  padding: 5px 5px;
+  position: sticky;
+  color: #1a1a1a;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar:hover {
+  background-color: #3333331a;
+  backdrop-filter: blur(5px);
+
+}
+
+/* Navbar Brand */
+.navbar-brand {
+  font-size: 26px;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #4caf50;
+}
+
+/* Navigation Links */
+.navbar-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-item {
+  margin: 0 5px;
+}
+
+.nav-link {
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 5px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* Hover and Active Link Effects */
+.nav-link:hover {
+  background-color: #4ca0af;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .navbar-toggler {
+    background-color: #4caf50;
+    border: none;
+  }
+
+  .navbar-toggler-icon {
+    background-color: white;
+  }
+
+  .navbar-collapse {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+
+/* Container Styling */
+.container {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+/* Additional Styling */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-weight: 600;
+}
+
+p {
+  color: #666;
+}
+
+
+.bodydiv{
+  background: url("../../public/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: center; */
+  background-attachment: fixed;
+}

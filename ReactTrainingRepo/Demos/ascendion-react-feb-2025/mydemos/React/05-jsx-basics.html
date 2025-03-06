@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX Basics</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const Invoice=({customer, items, points})=>{
+            return(
+                <div className="border border-dark p-4">
+                    <h1>Invoice</h1>
+                    <div>Customer: {customer}</div>
+                    {
+                        // points!==undefined&&
+                        // (
+                        //     <div>you currently have {points} points</div>
+                        // )
+                        
+                    }
+                    {
+                        points!==undefined ?
+                        (
+                            <div>you currently have {points} points</div>
+                        ):(
+                            <div> Become a <strong>Prime</strong> member to avail exiciting discounts</div>
+                        )
+                    }
+
+                    <table className="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        <th>Total</th>  
+                        <th>Action</th>                     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                items.map(item=>
+                                    <tr key={item.id}>
+                                        <td>{item.name}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.price*item.quantity}</td>
+                                        <td>{
+                                            <button className="btn btn-danger btn-sm" onClick={(event)=>{
+                                                console.log(event);
+                                                console.log(item);
+                                                console.log(customer);
+                                            }}>Delete</button>
+                                        }</td>
+                                    </tr>
+                            
+                                )
+                            }
+                        </tbody>
+                        
+                        </table>
+                </div>
+            );
+        };
+
+            const items = [
+                {
+                    id: 1,
+                    name: "Natraj Pencil",
+                    price: 100,
+                    quantity: 2
+                },
+                {
+                    id: 2,
+                    name: "Camlin Pen",
+                    price: 200,
+                    quantity: 1
+                },
+                {
+                    id: 3,
+                    name: "Apsara Pencil",
+                    price: 300,
+                    quantity: 4
+                },
+            ];
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(
+            <section className="container">
+                <Invoice customer="John" items={items} points={100}/>
+                <Invoice customer="Jane" items={items}/>
+            </section>
+        )
+    </script>
+</body>
+</html>

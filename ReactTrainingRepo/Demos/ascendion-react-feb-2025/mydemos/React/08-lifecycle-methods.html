@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title>
+            Handling side-effects (API calls) using lifecycle methods in class
+            component
+        </title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+
+        <script type="text/babel">
+            const getWorkshops = async (page = 1) => {
+                // axios.<method>() returns a Promise - operation goes on in the background and the result will be success / failure
+                const response = await axios.get(
+                    `https://workshops-server.onrender.com/workshops`,
+                    {
+                        params: {
+                            _page: page,
+                        },
+                    }
+                );
+
+                return response.data;
+            };
+
+            class WorkshopsList extends React.Component {
+                state = {
+                    loading: true,
+                    workshops: [],
+                    error: null,
+                    page: 1,
+                };
+
+                // event handlers in React are generally written using class property syntax - this ensures that the "this" is set correctly to the object of the class (otherwise it will be undefined)
+                next = () => {
+                    console.log(this);
+
+                    this.setState({
+                        page: this.state.page + 1,
+                    });
+
+                    // this.getWorkshops(); // page number would not have changed internally (state change is asynchronous)
+                };
+
+                previous = () => {
+                    console.log(this);
+
+                    this.setState({
+                        page: this.state.page - 1,
+                    });
+
+                    // this.getWorkshops(); // page number would not have changed internally (state change is asynchronous)
+                };
+
+                render() {
+                    const { loading, workshops, error, page } = this.state;
+
+                    return (
+                        <div>
+                            <h1>List of Workshops</h1>
+                            <hr />
+
+                            {loading && (
+                                <div className="text-center">
+                                    <div
+                                        className="spinner-border"
+                                        role="status"
+                                    >
+                                        <span className="visually-hidden">
+                                            Loading...
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {!loading && error && (
+                                <div
+                                    className="alert alert-danger"
+                                    role="alert"
+                                >
+                                    {error.message}
+                                </div>
+                            )}
+
+                            {!loading && !error && (
+                                <React.Fragment>
+                                    <div>
+                                        <button
+                                            className="btn btn-primary btn-sm me-2"
+                                            onClick={this.previous}
+                                        >
+                                            Previous
+                                        </button>
+                                        <button
+                                            className="btn btn-primary btn-sm"
+                                            onClick={this.next}
+                                        >
+                                            Next
+                                        </button>
+                                        <div>You are on page {page}</div>
+                                    </div>
+                                    <div className="row">
+                                        {workshops.map((w) => (
+                                            <div
+                                                className="col col-md-4 d-flex my-3"
+                                                key={w.id}
+                                            >
+                                                <div className="card p-3">
+                                                    <img
+                                                        src={w.imageUrl}
+                                                        className="card-img-top"
+                                                        alt={w.name}
+                                                    />
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">
+                                                            {w.name}
+                                                        </h5>
+                                                        <p className="card-text">
+                                                            {w.startDate} -{" "}
+                                                            {w.endDate}
+                                                        </p>
+                                                        <a
+                                                            href="#"
+                                                            className="btn btn-primary"
+                                                        >
+                                                            Know more
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </React.Fragment>
+                            )}
+                        </div>
+                    );
+                }
+
+                async getWorkshops() {
+                    const { page } = this.state;
+
+                    this.setState({
+                        loading: true,
+                    });
+
+                    try {
+                        const workshops = await getWorkshops(page);
+
+                        // what to do now? we set state and cause a re-render
+                        this.setState({
+                            loading: false,
+                            // workshops: workshops
+                            workshops,
+                        });
+                    } catch (error) {
+                        this.setState({
+                            loading: false,
+                            // error: error,
+                            error,
+                        });
+                    }
+                }
+
+                // called ONCE AFTER the first render (like ngOnInit)
+                componentDidMount() {
+                    this.getWorkshops();
+                }
+
+                // AFTER EVERY re-render (i.e. after the second render onwards, for every render)
+                // gets called after a prop / state change
+                componentDidUpdate(prevProps, prevState) {
+                    // On What kind of state change will we execute the logic - for us, we make this API call only if page change
+                    if (prevState.page !== this.state.page) {
+                        this.getWorkshops();
+                    }
+                }
+            }
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(
+                <div className="container my-4">
+                    <WorkshopsList />
+                </div>
+            );
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title>
+            Handling side-effects (API calls) using lifecycle methods in class
+            component
+        </title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+
+        <script type="text/babel">
+            const getWorkshops = async () => {
+                // axios.<method>() returns a Promise - operation goes on in the background and the result will be success / failure
+                const response = await axios.get(
+                    `https://workshops-server.onrender.com/workshops`
+                );
+
+                return response.data;
+            };
+
+            class WorkshopsList extends React.Component {
+                state = {
+                    loading: true,
+                    workshops: [],
+                    error: null,
+                    page: 1,
+                };
+
+                // event handlers in React are generally written using class property syntax - this ensures that the "this" is set correctly to the object of the class (otherwise it will be undefined)
+                next = () => {
+                    console.log(this);
+
+                    this.setState({
+                        page: this.state.page + 1,
+                    });
+
+                    // this.getWorkshops(); // page number would not have changed internally (state change is asynchronous)
+                };
+
+                previous = () => {
+                    console.log(this);
+
+                    this.setState({
+                        page: this.state.page - 1,
+                    });
+
+                    // this.getWorkshops(); // page number would not have changed internally (state change is asynchronous)
+                };
+
+                render() {
+                    const { loading, workshops, error } = this.state;
+
+                    return (
+                        <div>
+                            <h1>List of Workshops</h1>
+                            <hr />
+
+                            {loading && (
+                                <div className="text-center">
+                                    <div
+                                        className="spinner-border"
+                                        role="status"
+                                    >
+                                        <span className="visually-hidden">
+                                            Loading...
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {!loading && error && (
+                                <div
+                                    className="alert alert-danger"
+                                    role="alert"
+                                >
+                                    {error.message}
+                                </div>
+                            )}
+
+
+
+                            {!loading && !error && (
+                                <React.Fragment>
+                                    <div>
+                                        <button onClick={this.previous}>Prev</button>
+                                    </div>
+                                    <div>
+                                        <button onClick={this.next}>Next</button>
+                                    </div>
+                                    <div> You are on page {page} </div>
+                                    <div className="row">
+                                        {workshops.map((w) => (
+                                        <div
+                                            className="col col-md-4 d-flex my-3"
+                                            key={w.id}
+                                        >
+                                            <div class="card p-3">
+                                                <img
+                                                    src={w.imageUrl}
+                                                    class="card-img-top"
+                                                    alt={w.name}
+                                                />
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        {w.name}
+                                                    </h5>
+                                                    <p class="card-text">
+                                                        {w.startDate} -{" "}
+                                                        {w.endDate}
+                                                    </p>
+                                                    <a
+                                                        href="#"
+                                                        class="btn btn-primary"
+                                                    >
+                                                        Know more
+                                                    </a>
+                                                </div>
+                                                </div>
+                                                </div>
+                                            ))}
+                                            </div>
+                                </React.Fragment>
+                            )}
+                        </div>
+                    );
+                }
+
+                // called once AFTER the first render (like ngOnInit)
+                async componentDidMount() {
+                    this.setState({
+                        loading: true,
+                    });
+
+                    try {
+                        const workshops = await getWorkshops();
+
+                        // what to do now? we set state and cause a re-render
+                        this.setState({
+                            loading: false,
+                            // workshops: workshops
+                            workshops,
+                        });
+                    } catch (error) {
+                        this.setState({
+                            loading: false,
+                            // error: error,
+                            error,
+                        });
+                    }
+                }
+                componentDidUpdate(prevprops,prevstate){
+                    if(prevstate.page!=this.state.page){
+                        this.getWorkshops();
+                    }
+                }
+            }
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(
+                <div className="container my-4">
+                    <WorkshopsList />
+                </div>
+            );
+        </script>
+    </body>
+</html> -->

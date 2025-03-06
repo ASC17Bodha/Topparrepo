@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Function component</title>
+        <style>
+            .message {
+                padding: 1em;
+                border: 1px solid #333;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+            // 1. Name of the component starts with  an uppercase letter
+            // const Message = (props) => {
+            // console.log("props = ", props);
+
+            // ...
+            // }
+
+            const Message = ({ title, children }) => {
+                console.log(children);
+                // destructuring...
+                // const { title, children } = props;
+
+                // const title = props.title;
+                // const children = props.children;
+
+                // returns the UI that the component represents
+                // again, if we want to return multiple elements, we can group (preferably) in a Fragment
+                return (
+                    <div className="message">
+                        <h1>{title}</h1>
+                        <div>{children}</div>
+                    </div>
+                );
+            };
+
+            // The props (custom attributes) that we pass to the component, will be collected into an object
+            /**
+             * props -> {
+             *      title: "Namaste React",
+             *      content: "React is a JavaScript library for building user interfaces."
+             * }
+             */
+            // This does not make sense
+            // const messageEl = { name: 'John' }{ name: 'Jane' };
+
+            const messageEl = (
+                /* prefer using React.Fragment instead of div etc. when container is used solely for grouping */
+                <React.Fragment>
+                    <Message title="Namaste React">
+                        <strong>React</strong> is a JavaScript library for
+                        building user interfaces!
+                    </Message>
+                    <Message title="Namaste Redux">
+                        <div>
+                            Redux is a state management library
+                            <div>
+                                <a href="https://redux.js.org/">
+                                    Redux documentation
+                                </a>
+                            </div>
+                        </div>
+                    </Message>
+                </React.Fragment>
+            );
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(messageEl);
+        </script>
+    </body>
+</html>

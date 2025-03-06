@@ -1,0 +1,44 @@
+﻿@model MeetingfrontEnd.Models.Meeting
+
+@{
+    ViewData["Title"] = "Meeting Details";
+}
+
+<h1>Meeting Details</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Title:</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+        <dt class="col-sm-3">Date:</dt>
+        <dd class="col-sm-9">@Model.Date.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Time:</dt>
+        <dd class="col-sm-9">@Model.StartTime.ToString("HH:mm") - @Model.EndTime.ToString("HH:mm")</dd>
+
+        <dt class="col-sm-3">Description:</dt>
+        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Description) ? "-" : Model.Description)</dd>
+
+        <dt class="col-sm-3">Attendees:</dt>
+        <dd class="col-sm-9">
+            @if (!string.IsNullOrEmpty(Model.Attendees))
+            {
+                <ul>
+                    @foreach (var attendee in Model.Attendees.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        <li>@attendee.Trim()</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>No attendees specified</span>
+            }
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

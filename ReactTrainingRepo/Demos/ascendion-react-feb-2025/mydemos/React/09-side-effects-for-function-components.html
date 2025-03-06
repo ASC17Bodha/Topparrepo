@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title></title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+
+        <script type="text/babel">
+            const getWorkshops = async (page = 1) => {
+                const response = await axios.get(
+                    `https://workshops-server.onrender.com/workshops`,
+                    {
+                        params: {
+                            _page: page,
+                        },
+                    }
+                );
+
+                return response.data;
+            };
+
+            const WorkshopsList = () => {
+                const [loading, setLoading] = React.useState(true);
+                const [workshops, setWorkshops] = React.useState([]);
+                const [error, setError] = React.useState(null);
+                const [page, setPage] = React.useState(1);
+
+                React.useEffect(
+                    // side-effect function (f)
+                    () => {
+                        const helper = async () => {
+                            setLoading(true);
+
+                            try {
+                                const workshops = await getWorkshops(page);
+
+                                setLoading(false);
+                                setWorkshops(workshops);
+                            } catch (error) {
+                                setLoading(false);
+                                setError(error);
+                            }
+                        };
+
+                        helper();
+                    },
+                    // dependency array - when you pass an empty array, f will behave like componentDidMount, i.e. f executes AFTER the first render
+                    // []
+                    [page]
+                );
+
+                // React.useEffect(
+                //     () => {
+
+                //     },
+                //     [loading]
+                // )
+
+                const next = () => {
+                    // when the new state depends on the current state, a better way to update the state is using the function form of the state setter
+                    // do not make use of page variable
+                    setPage((p) => p + 1);
+                    // console.log( page );
+                };
+
+                const previous = () => {
+                    setPage((p) => p - 1);
+                };
+
+                return (
+                    <div>
+                        <h1>List of Workshops</h1>
+                        <hr />
+
+                        {loading && (
+                            <div className="text-center">
+                                <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+
+                        {!loading && error && (
+                            <div className="alert alert-danger" role="alert">
+                                {error.message}
+                            </div>
+                        )}
+
+                        {!loading && !error && (
+                            <React.Fragment>
+                                <div>
+                                    <button
+                                        className="btn btn-primary btn-sm me-2"
+                                        onClick={previous}
+                                    >
+                                        Previous
+                                    </button>
+                                    <button
+                                        className="btn btn-primary btn-sm"
+                                        onClick={next}
+                                    >
+                                        Next
+                                    </button>
+                                    <div>You are on page {page}</div>
+                                </div>
+                                <div className="row">
+                                    {workshops.map((w) => (
+                                        <div
+                                            className="col col-md-4 d-flex my-3"
+                                            key={w.id}
+                                        >
+                                            <div className="card p-3">
+                                                <img
+                                                    src={w.imageUrl}
+                                                    className="card-img-top"
+                                                    alt={w.name}
+                                                />
+                                                <div className="card-body">
+                                                    <h5 className="card-title">
+                                                        {w.name}
+                                                    </h5>
+                                                    <p className="card-text">
+                                                        {w.startDate} -{" "}
+                                                        {w.endDate}
+                                                    </p>
+                                                    <a
+                                                        href="#"
+                                                        className="btn btn-primary"
+                                                    >
+                                                        Know more
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(
+                <div className="container my-4">
+                    <WorkshopsList />
+                </div>
+            );
+        </script>
+    </body>
+</html>

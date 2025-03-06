@@ -1,0 +1,60 @@
+<!-- display the meeting details -->
+<h2>Search Meet</h2>
+<label for="search">Search:</label>
+<input type="text" id="search" [ngModel]="searchTerm" (ngModelChange)="searchTerm = $event; searchMeetings()">
+
+<div>
+    <label for="dateFilter">Filter by Date:</label>
+    <select id="dateFilter" class="form-select" (change)="getMeetingsByDate($event)">
+        <option value="all">All Meetings</option>
+        <option value="past">Past Meetings</option>
+        <option value="present">Present Meetings</option>
+        <option value="future">Future Meetings</option>
+    </select>
+</div>
+
+
+ <div class="container mt-4">
+    <h2>Meeting List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Description</th>
+                <th>Attendees</th>
+                <th>Excuse </th>
+            </tr>
+        </thead>
+        <tr *ngFor="let meeting of filteredMeetings">
+            <td>{{meeting.title}}</td>
+            <td>{{meeting.date}}</td>
+            <td>{{meeting.startTime}}</td>
+            <td>{{meeting.endTime}}</td>
+            <td>{{meeting.description}}</td>
+            <td>
+                <div ngbDropdown class="d-inline-block">
+                    <!-- <button class="btn btn-outline-primary" id="attendeesDropdown" ngbDropdownToggle>
+                        View Attendees
+                    </button> -->
+                    <div ngbDropdownMenu aria-labelledby="attendeesDropdown">
+                        <div *ngFor="let attendee of meeting.attendees.split(',')" class="px-3 py-1">
+                            <span>{{attendee}}</span>
+                            <!-- <button class="btn btn-danger btn-sm ms-2" (click)="removeAttendee(meeting,meeting.id, attendee)"> -->
+                                <!-- Execuse -->
+                            <!-- </button> -->
+                        </div>
+                    </div>
+                     
+                </div>
+            </td>
+                <td>
+                    <button class="btn btn-danger btn-sm ms-2" (click)="removeAttendee(meeting,meeting.id)">
+                        Execuse yourself
+                    </button>
+                </td>
+        </tr>
+    </table>
+</div>

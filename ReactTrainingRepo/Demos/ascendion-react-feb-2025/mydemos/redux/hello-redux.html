@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"></script>
+
+</head>
+<body>
+    <button id="btn-decrement" onclick="store.dispatch(decrement())">-</button>
+    <span id="value">0</span>
+    <button id="btn-increment" onclick="store.dispatch(increment())">+</button>
+
+    <script>
+        const INCREMENT = "counter/increment";
+        const DECREMENT = "counter/decrement";
+
+
+        const increment = () => {
+            return {
+                type: INCREMENT
+            };
+        };
+
+        const decrement = () =>{
+            return {
+                type: DECREMENT
+            };
+        };
+
+        const initialState = {
+            value: 0,
+        };
+
+        const reducer = (curState =initialState, action) => {
+            switch(action.type){
+                case INCREMENT:
+                    newState={
+                        ...curState,
+                        value:curState.value+1,
+                    }
+                    break;
+                case DECREMENT:
+                    newState={
+                        ...curState,
+                        value:curState.value-1,
+                    }
+                    break;
+                default:
+                    return newState=curState;
+            }
+            return newState;
+        };
+
+        const store= Redux.createStore(reducer);
+        const valueEl=document.getElementById("value");
+        const btnDecrement=document.getElementById("btn-decrement");
+        const btnIncrement=document.getElementById("btn-increment");
+        function render(){
+            const state=store.getState();
+            valueEl.innerText=state.value;
+        };
+        render();
+        store.subscribe(render);
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- src/app/components/authors/authors.component.html -->
+
+<div class="container">
+  <div class="form-container">
+    <div class="authorform">
+
+      <!-- Add/Edit Author Form -->
+      <h3>{{ isEditing ? 'Edit Author' : 'Add New Author' }}</h3>
+      <form (ngSubmit)="saveAuthor()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              [(ngModel)]="currentAuthor.name"
+              name="name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              [(ngModel)]="currentAuthor.email"
+              name="email"
+              required
+              />
+            </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              [(ngModel)]="currentAuthor.phone"
+              name="phone"
+              required
+              />
+            </div>
+            <div class="form-group">
+              <label for="biography">About Author:</label>
+              <textarea
+              class="form-control"
+              id="biography"
+              [(ngModel)]="currentAuthor.biography"
+              name="biography"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update Author' : 'Add Author' }}</button>
+          <button type="button" (click)="addNewAuthor()" class="btn btn-secondary">Cancel</button>
+        </form>
+      </div>
+
+    <div class="formtable">
+
+      <h2>Authors List</h2>
+      
+      <!-- Search Form -->
+      <div class="search-form">
+    <input
+    type="text"
+    [(ngModel)]="searchTerm"
+      class="form-control"
+      placeholder="Search by name or email"
+      (input)="filterAuthors()"     
+    />
+  </div>
+  
+  <!-- Author List -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>About Author</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of filteredAuthors"> <!-- Display filteredAuthors -->
+        <td>{{ author.authorId }}</td>
+        <td>{{ author.name }}</td>
+        <td>{{ author.email }}</td>
+        <td>{{ author.phone }}</td>
+        <td>{{author.biography}}</td>
+        <td>
+          <button (click)="viewAuthor(author.authorId)" class="btn btn-info">Edit</button>
+          <button (click)="deleteAuthor(author.authorId)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+</div>

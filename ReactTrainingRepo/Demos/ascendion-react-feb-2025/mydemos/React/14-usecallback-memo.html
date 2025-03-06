@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title>Lifting state</title>
+        <style>
+            .panel {
+                border: 1px solid #333;
+                border-radius: 4px;
+                margin: 16px;
+            }
+
+            .panel-question,
+            .panel-answer {
+                padding: 1em;
+            }
+
+            .panel-question {
+                background-color: #333;
+                color: ivory;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+            /**
+             * By default, when Parent component renders, ALL the child components will render
+             * We can prevent a component from rendering by enclosing its definition in React.memo()
+             *  If such a component receives the SAME props as during the previous render, it will prevent re-rendering
+             */
+            const PanelQuestion = React.memo(({ question, toggle }) => {
+                console.log("PanelQuestion render");
+
+                return (
+                    <div className="panel-question" onClick={toggle}>
+                        {question}
+                    </div>
+                );
+            });
+
+            const PanelAnswer = ({ answer, show }) => {
+                console.log("PanelAnswer render");
+
+                return show ? (
+                    <div className="panel-answer">{answer}</div>
+                ) : null;
+            };
+
+            const Panel = ({ question, answer }) => {
+                console.log("Panel render");
+
+                // setShow is a "stable function" - it is not recreated for every render
+                const [show, setShow] = React.useState(true);
+
+                // The function is recreated (it is a local varaible of Panel function)
+                const toggle = React.useCallback(
+                    () => {
+                        // cb
+                        setShow((s) => !s);
+                    },
+                    [setShow] // the function cb will be recreated only when setShow changes
+                );
+
+                return (
+                    <div className="panel">
+                        <PanelQuestion question={question} toggle={toggle} />
+                        <PanelAnswer answer={answer} show={show} />
+                    </div>
+                );
+            };
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(
+                <div className="container my-4">
+                    <Panel
+                        question="What is React?"
+                        answer="It is a library for frontend apps"
+                    />
+                </div>
+            );
+        </script>
+    </body>
+</html>

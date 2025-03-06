@@ -1,0 +1,54 @@
+<div class="bodydiv">
+  <div class="container mt-5">
+   
+
+    <!-- Search Section -->
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchTerm"
+        (input)="searchAdmins()"
+        placeholder="Search by ID, Name, or Email"
+      />
+    </div>
+    <button type="button" class="btn btn-primary mt-3" id="addbtn"  (click)="AddAdmin()">Add Admin</button>
+    <!-- Admin update form -->
+    <div *ngIf="currentAdmin.aId" class="mt-3">
+      <h2 >Edit Admin</h2>
+      <form (ngSubmit)="updateAdmin(currentAdmin)">
+        <div class="form-group">
+          <label for="adminId">Admin ID:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentAdmin.aId" name="aId" disabled />
+        </div>
+        <div class="form-group">
+          <label for="adminName">Name:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentAdmin.name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="adminEmail">Email:</label>
+          <input type="email" class="form-control" [(ngModel)]="currentAdmin.email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="adminPhone">Phone:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentAdmin.phone" name="phone" required />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Update Admin</button>
+        <button type="button" class="btn btn-secondary mt-3 ms-2 cancelbtn"  (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+
+    <!-- Admins List -->
+    <h2>Admins List</h2>
+    <ul class="list-group mt-3">
+      <li *ngFor="let admin of filteredAdmins" class="list-group-item">
+        <strong>ID:</strong> {{ admin.aId }} <br />
+        <strong>Name:</strong> {{ admin.name }} <br />
+        <strong>Email:</strong> {{ admin.email }} <br />
+        <strong>Phone:</strong> {{ admin.phone }} <br />
+        <button class="btn btn-warning btn-sm float-end ms-2" (click)="editAdmin(admin)">Edit</button>
+        <button class="btn btn-danger btn-sm float-end" (click)="deleteAdmin(admin.aId)">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>

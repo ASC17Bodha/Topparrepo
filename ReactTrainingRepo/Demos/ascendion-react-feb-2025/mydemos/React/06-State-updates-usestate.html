@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+        <title>JSX Basics</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+            /* useState() is used to maintain state in a function component */
+            /* useState() is one of the "hooks" in React (a group of methods) - other hooks are useEffect, useRef, useContext, useReducer, useMemo */
+            /* Hooks were introduced in React 16.8, and they gave powers to function component which earlier only class components had */
+            /* hooks can be made use of only "directly" within function components (cannot be used in nested function, or if block, for loop in the function components) */
+            // import { useState } from 'react';
+
+            const Invoice = ({ customer, items, points }) => {
+                /* initial state value is passed */
+                /* useState() returns an array with 2 items */
+
+                const [curItems, setCurItems] = React.useState(items);
+
+                // console.log(curItems);
+                // console.log(setCurItems);
+
+                // alternatively...
+                // const result = React.useState(items);
+
+                // console.log(result[0]); // state data
+                // console.log(result[1]); // setter function for the data
+
+                // const curItems = result[0];
+                // const setCurItems = result[1];
+
+                function onClickDeleteBtn(event, item) {
+                    console.log(item);
+
+                    // we want to remove the `item` from curItems
+
+                    const newCurItems = curItems.filter(
+                        (it) => it.id !== item.id
+                    );
+
+                    // when we want to update the state variable, we need to use the setter for it
+                    setCurItems(newCurItems);
+                }
+
+                return (
+                    <div className="border border-dark p-4">
+                        <h1>Invoice</h1>
+                        <hr />
+                        <div>Customer: {customer}</div>
+
+                        {points !== undefined ? (
+                            <div>You currently have {points} points</div>
+                        ) : (
+                            <div>
+                                Become a <strong>Prime member</strong> and avail
+                                exciting discounts on your future purchases.
+                            </div>
+                        )}
+
+                        <table className="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {curItems.map((item) => (
+                                    <tr key={item.id}>
+                                        <td>{item.name}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.quantity * item.price}</td>
+                                        <td>
+                                            <button
+                                                className="btn btn-danger btn-sm"
+                                                onClick={(event) => {
+                                                    onClickDeleteBtn(
+                                                        event,
+                                                        item
+                                                    );
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            };
+
+            const items = [
+                {
+                    id: 1,
+                    name: "Camlin Pen",
+                    price: 50,
+                    quantity: 2,
+                },
+                {
+                    id: 2,
+                    name: "Natraj Pencil",
+                    price: 5,
+                    quantity: 10,
+                },
+                {
+                    id: 3,
+                    name: "Apsara Eraser",
+                    price: 10,
+                    quantity: 5,
+                },
+            ];
+
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(
+                <section className="container my-4">
+                    <Invoice customer="John Doe" items={items} points={45} />
+                    <Invoice customer="Jane Doe" items={items} />
+                </section>
+            );
+        </script>
+    </body>
+</html>
